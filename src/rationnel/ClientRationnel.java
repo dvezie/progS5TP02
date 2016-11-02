@@ -42,12 +42,28 @@ public class ClientRationnel {
 
 	}
 	
+	/**
+	 * Demande la saisie d'une rationnel et renvoie le rationnel lu
+	 * @param input : Scanner 
+	 * @return RationnelSimple le rationnel lu
+	 */
 	static Rationnel lireRationnel(Scanner input) {
 		System.out.print("\nSaisir le numérateur : ");
 		int num = input.nextInt();
 		System.out.print("Saisir le dénominateur : ");
 		int den = input.nextInt();
-		return new RationnelSimple(num, den);		
+		return makeRationnel(num, den);		
 	}
 
+	/**
+	 * Crée et renvoie une instance de RationnelSimple initialisée avec les paramètres de la fonction
+	 * @param num : int numérateur
+	 * @param den : int dénominateur
+	 * @return Rationnel : instance de RationnelSimple
+	 * @pre den != 0
+	 */
+	static Rationnel makeRationnel(int num, int den) {
+		assert den != 0 : "*** PRÉ-CONDITION NON VÉRIFIÉE *** : den doit être != 0";
+		return new RationnelSimple(num, den);
+	}
 }

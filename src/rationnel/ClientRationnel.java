@@ -1,0 +1,53 @@
+package rationnel;
+
+import java.util.Scanner;
+
+import types.Rationnel;
+
+public class ClientRationnel {
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		Rationnel r = lireRationnel(input), rPrec = new RationnelSimple(0,1);
+		String strAffichage;
+		int iVerif;
+		
+		while(r.valeur() != 0) {
+			// affichage du dernier rationnel lu
+			System.out.println("Le rationnel lu est : " + r.toString());
+			
+			// calcul & affiche de la somme du rationnel avec le précédent (0 à la 1ère itération)
+			strAffichage = "Somme avec le précédent : ";
+			strAffichage += rPrec.getNumerateur() != 0 ? r.somme(rPrec) : 0;
+			System.out.println(strAffichage);
+			
+			// affichage de l'inverse du rationnel
+			System.out.println("L'inverse du rationnel est : " + r.inverse());
+
+			// affichage de la valeur réelle du rationnel
+			System.out.println("La valeur réelle du rationnel est : " + r.valeur());
+
+			// comparaison avec le précédent (compareTo)
+			iVerif = r.compareTo(rPrec);
+			strAffichage = iVerif < 0 ? "inférieur" : (iVerif > 0 ? "supérieur" : "égal");
+			System.out.println("(compareTo) Le rationnel est " + strAffichage + " au précédent.");
+
+			// comparaison avec le précédent (équals)
+			strAffichage = r.equals(rPrec) ? "est" : "n'est pas";
+			System.out.println("(equals) Le rationnel " + strAffichage + " égal au précédent.");
+			
+			rPrec = r;
+			r = lireRationnel(input); 
+		}
+
+	}
+	
+	static Rationnel lireRationnel(Scanner input) {
+		System.out.print("\nSaisir le numérateur : ");
+		int num = input.nextInt();
+		System.out.print("Saisir le dénominateur : ");
+		int den = input.nextInt();
+		return new RationnelSimple(num, den);		
+	}
+
+}

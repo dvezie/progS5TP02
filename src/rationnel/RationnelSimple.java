@@ -8,6 +8,15 @@ public class RationnelSimple implements Rationnel {
 	private int _num, _den;
 	
 	/**
+	   * initialiser un rationnel à partir d'un entier : nb/1
+	   * @param num : valeur du numérateur
+	   */
+	public RationnelSimple(int num) {
+		this._num = num;
+		this._den = 1;
+	}
+	
+	/**
 	   * initialiser un rationnel avec numerateur et dénominateur
 	   * @param num : valeur du numérateur
 	   * @param den : valeur du dénominateur
@@ -16,8 +25,30 @@ public class RationnelSimple implements Rationnel {
 	   */
 	public RationnelSimple(int num, int den) {
 		assert den != 0 : "*** PRÉ-CONDITION NON VÉRIFIÉE : den doit être != 0"; 
+		
+		if ((num<0 && den<0)||(num>=0 && den<0)) {
+			num = -num;
+			den = -den;
+		}
+		
+		int pgcd = Outils.pgcd(num, den);
+		if(pgcd > 1) {
+			num = num / pgcd;
+			den = den / pgcd;
+		}
+		
 		this._den = den;
 		this._num = num;
+	}
+	
+	/**
+	   * initialiser un rationnel à partir d'un autre
+	   * @param r : rationnel à dupliquer
+	   */
+	public RationnelSimple(Rationnel r) {
+		r = this.simplifier(r);
+		this._den = r.getDenominateur();
+		this._num = r.getNumerateur();
 	}
 	
 	@Override
@@ -27,17 +58,24 @@ public class RationnelSimple implements Rationnel {
 
 	@Override
 	public Rationnel somme(Rationnel r) {
-		int somNum, somDen, pgcd;
+		int somNum, somDen;
 		somNum = this._num*r.getDenominateur() + this._den*r.getNumerateur();
 		somDen = this._den*r.getDenominateur();
 		
-		pgcd = Outils.pgcd(somNum, somDen);
+		return this.simplifier(somNum, somDen);
+	}
+	
+	public Rationnel simplifier(int num, int den) {
+		int pgcd = Outils.pgcd(num, den);
 		if(pgcd > 1) {
-			somNum = somNum / pgcd;
-			somDen = somDen / pgcd;
+			num = num / pgcd;
+			den = den / pgcd;
 		}
 		
-		return new RationnelSimple(somNum, somDen);
+		return new RationnelSimple(num, den);
+	}
+	public Rationnel simplifier(Rationnel r) {
+		return this.simplifier(r.getNumerateur(), r.getDenominateur());
 	}
 	
 	@Override

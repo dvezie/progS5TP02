@@ -26,19 +26,24 @@ public class RationnelSimple implements Rationnel {
 	public RationnelSimple(int num, int den) {
 		assert den != 0 : "*** PRÉ-CONDITION NON VÉRIFIÉE : den doit être != 0"; 
 		
-		if ((num<0 && den<0)||(num>=0 && den<0)) {
-			num = -num;
-			den = -den;
-		}
-		
-		int pgcd = Outils.pgcd(num, den);
-		if(pgcd > 1) {
-			num = num / pgcd;
-			den = den / pgcd;
-		}
+//		////////// On simplifie la fraction //////////
+//		// Gestion des signes
+//		if ((num<0 && den<0)||(num>=0 && den<0)) {
+//			num = -num;
+//			den = -den;
+//		}
+//		// Gestion des valeurs
+//		int pgcd = Outils.pgcd(num, den);
+//		if(pgcd > 1) {
+//			num = num / pgcd;
+//			den = den / pgcd;
+//		}
+//		///////////////////////////////////////////////
 		
 		this._den = den;
 		this._num = num;
+		
+		this.simplifier();
 	}
 	
 	/**
@@ -46,9 +51,10 @@ public class RationnelSimple implements Rationnel {
 	   * @param r : rationnel à dupliquer
 	   */
 	public RationnelSimple(Rationnel r) {
-		r = this.simplifier(r);
+		//r = this.simplifier(r);
 		this._den = r.getDenominateur();
 		this._num = r.getNumerateur();
+		this.simplifier();
 	}
 	
 	@Override
@@ -62,21 +68,58 @@ public class RationnelSimple implements Rationnel {
 		somNum = this._num*r.getDenominateur() + this._den*r.getNumerateur();
 		somDen = this._den*r.getDenominateur();
 		
-		return this.simplifier(somNum, somDen);
+		//return this.simplifier(somNum, somDen);
+		return new RationnelSimple(somNum, somDen);
 	}
 	
-	public Rationnel simplifier(int num, int den) {
-		int pgcd = Outils.pgcd(num, den);
-		if(pgcd > 1) {
-			num = num / pgcd;
-			den = den / pgcd;
+	public void simplifier() {
+		//////////On simplifie la fraction //////////
+		// Gestion des signes
+		if ((this._num<0 && this._den<0)||(this._num>=0 && this._den<0)) {
+			this._num = -this._num;
+			this._den = -this._den;
 		}
-		
-		return new RationnelSimple(num, den);
+		// Si la fraction est négative alors on change le signe de 
+		// celle-ci le temps de calculer le pgcd
+		int pgcd = 0;
+		if(this._num < 0) {
+			pgcd = Outils.pgcd(-this._num, this._den);
+		} else if(this._num > 0) {
+			pgcd = Outils.pgcd(this._num, this._den);			
+		}		
+		// Gestion des valeurs
+		if(pgcd > 1) {
+			this._num = this._num / pgcd;
+			this._den = this._den / pgcd;
+		}
+		///////////////////////////////////////////////
 	}
-	public Rationnel simplifier(Rationnel r) {
-		return this.simplifier(r.getNumerateur(), r.getDenominateur());
-	}
+	
+//	public Rationnel simplifier(int num, int den) {
+//		
+//		//////////On simplifie la fraction //////////
+//		// Gestion des signes
+//		if ((num<0 && den<0)||(num>=0 && den<0)) {
+//			num = -num;
+//			den = -den;
+//		}
+//		// Gestion des valeurs
+//		int pgcd = Outils.pgcd(num, den);
+//		if(pgcd > 1) {
+//			num = num / pgcd;
+//			den = den / pgcd;
+//		}
+//		///////////////////////////////////////////////
+//		
+//		return new RationnelSimple(num, den);
+//	}
+//	public Rationnel simplifier(Rationnel r) {
+//		return this.simplifier(r.getNumerateur(), r.getDenominateur());
+//	}
+//	
+//	public Rationnel simplifier() {
+//		return this.simplifier(this.getNumerateur(), this.getDenominateur());
+//	}
 	
 	@Override
 	public Rationnel inverse() {

@@ -9,18 +9,13 @@ public class ClientRationnel {
 
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-		Rationnel r = lireRationnel(input), rPrec = new RationnelSimple(0,1);
+		Rationnel r = lireRationnel(input), rPrec = new RationnelSimple(0);
 		String strAffichage;
 		int iVerif;
 		
 		while(r.valeur() != 0) {
 			// affichage du dernier rationnel lu
-			System.out.println("Le rationnel lu est : " + r.toString());
-			
-			// calcul & affiche de la somme du rationnel avec le précédent (0 à la 1ère itération)
-			strAffichage = "Somme avec le précédent : ";
-			strAffichage += rPrec.getNumerateur() != 0 ? r.somme(rPrec) : 0;
-			System.out.println(strAffichage);
+			System.out.println("Le rationnel lu est : " + r.toString());		
 			
 			// affichage de l'inverse du rationnel
 			System.out.println("L'inverse du rationnel est : " + r.inverse());
@@ -31,11 +26,17 @@ public class ClientRationnel {
 			// comparaison avec le précédent (compareTo)
 			iVerif = r.compareTo(rPrec);
 			strAffichage = iVerif < 0 ? "inférieur" : (iVerif > 0 ? "supérieur" : "égal");
-			System.out.println("(compareTo) Le rationnel est " + strAffichage + " au précédent.");
+			System.out.println("\n(compareTo) Le rationnel est " + strAffichage + " au précédent.");
 
-			// comparaison avec le précédent (équals)
+			// comparaison avec le précédent (equals)
 			strAffichage = r.equals(rPrec) ? "est" : "n'est pas";
 			System.out.println("(equals) Le rationnel " + strAffichage + " égal au précédent.");
+			
+			// calcul & affiche de la somme du rationnel avec le précédent (0 à la 1ère itération)
+			strAffichage = "\nSomme avec le précédent : ";
+			strAffichage += r.somme(rPrec);
+			//strAffichage += rPrec.getNumerateur() != 0 ? r.somme(rPrec) : 0;
+			System.out.println(strAffichage);			
 			
 			rPrec = r;
 			r = lireRationnel(input); 
@@ -75,6 +76,9 @@ public class ClientRationnel {
 	 * @param nb
 	 */
 	static void afficher (Rationnel [ ] lesRationnels , int nb) {
-		
+		assert nb < lesRationnels.length : "*** PRÉ-CONDITION NON VÉRIFIÉE *** : nb doit être inférieur à la taille du tableau";
+		for(int i=0 ; i<nb ; i++) {
+			System.out.println(lesRationnels[i].toString()+" = "+lesRationnels[i].valeur());
+		}
 	}
 }

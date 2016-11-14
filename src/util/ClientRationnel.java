@@ -2,6 +2,7 @@ package util;
 
 import java.util.Scanner;
 
+import rationnel.RationnelCouple;
 import rationnel.RationnelSimple;
 import types.Rationnel;
 

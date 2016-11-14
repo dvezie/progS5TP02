@@ -11,7 +11,7 @@ public class ClientRationnel {
 		Scanner input = new Scanner(System.in);
 		Rationnel nouveau = lireRationnel(input), precedent = new RationnelSimple(0);
 		String strAffichage;
-		int capacite = 5;
+		int capacite = 100;
 		Rationnel[] lesRationnels = new Rationnel[capacite];
 		int iVerif;
 		int nb = 0;
@@ -35,21 +35,28 @@ public class ClientRationnel {
 			strAffichage = nouveau.equals(precedent) ? "est" : "n'est pas";
 			System.out.println("(equals) Le rationnel " + strAffichage + " égal au précédent.");
 			
-			// calcul & affiche de la somme du rationnel avec le précédent (0 à la 1ère itération)
+			// calcul de la somme du rationnel avec le précédent (0 à la 1ère itération)
 			strAffichage = "\nSomme avec le précédent : ";
 			strAffichage += nouveau.somme(precedent);
-			//strAffichage += precedent.getNumerateur() != 0 ? r.somme(precedent) : 0;
+			
+			//Affichage
 			System.out.println(strAffichage);						
 			
-			insererRationnel(nouveau, lesRationnels, nb);
-			if(nb<capacite) {				
+			
+			// Insertion du rationnel dans le tableau
+			// Si le tableau est déjà plein on averti l'utilisateur
+			if(nb<capacite) {			
+				insererRationnel(nouveau, lesRationnels, nb);
 				nb++;
-			} else {
+			} else {			
 				System.out.println("\n!!! Tableau plein !!!\n");
 			}
+			
+			// Affichage des rationnels du tableau et de la somme de ceux-ci
 			afficher(lesRationnels, nb);
 			System.out.println("Somme des rationnels du tableau : "+sommeRationnels(lesRationnels,nb).toString());
 			
+			// Préparation pour la prochaine itération
 			precedent = nouveau;		
 			nouveau = lireRationnel(input); 
 		}
@@ -57,9 +64,9 @@ public class ClientRationnel {
 	}
 	
 	/**
-	 * Demande la saisie d'une rationnel et renvoie le rationnel lu
-	 * @param input : Scanner 
-	 * @return RationnelSimple le rationnel lu
+	 * Demande la saisie d'un rationnel et renvoie le rationnel lu
+	 * @param input : Scanner permettant de saisir les rationnels
+	 * @return Rationnel : le rationnel saisi
 	 */
 	static Rationnel lireRationnel(Scanner input) {
 		System.out.print("\nSaisir le numérateur : ");
@@ -73,22 +80,23 @@ public class ClientRationnel {
 	 * Crée et renvoie une instance de RationnelSimple initialisée avec les paramètres de la fonction
 	 * @param num : int numérateur
 	 * @param den : int dénominateur
-	 * @return Rationnel : instance de RationnelSimple
 	 * @pre den != 0
+	 * @return Rationnel : instance de RationnelSimple
 	 */
 	static Rationnel makeRationnel(int num, int den) {
-		assert den != 0 : "*** PRÉ-CONDITION NON VÉRIFIÉE *** : den doit être != 0";
+		assert den != 0 : "*** PRÉ-CONDITION NON VÉRIFIÉE *** : den doit être différent de 0";
 		return new RationnelSimple(num, den);
 	}
 	
 	/**
 	 * Affiche (fraction et valeur) les nb premiers éléments d’un tableau de rationnels ; le tableau 
 	 * est supposé créé et initialisé avant l’appel et (bien sûr) 0 ≤ nb ≤ lesRationnels.length
-	 * @param lesRationnels
-	 * @param nb
+	 * @param lesRationnels : tableau de rationnels
+	 * @param nb : nombre d ’ éléments dans le tableau 
+	 * @pre : 0 ≤ nb < lesRationnels.length
 	 */
 	static void afficher (Rationnel [ ] lesRationnels , int nb) {
-		assert nb <= lesRationnels.length : "*** PRÉ-CONDITION NON VÉRIFIÉE *** : nb doit être inférieur à la taille du tableau";		
+		assert nb <= lesRationnels.length : "*** PRÉ-CONDITION NON VÉRIFIÉE *** : nb doit être inférieur ou égal à la taille du tableau";		
 		for(int i=0 ; i<nb ; i++) {
 			System.out.println(lesRationnels[i].toString()+" = "+lesRationnels[i].valeur());
 		}
@@ -96,45 +104,39 @@ public class ClientRationnel {
 	
 	/**
 	 * insérer le rationnel nouveau dans le tableau lesRationnels 
-	 * @pre : tableau trié ( ordre croissant )
+	 * @param nouveau : rationnel à insérer
+	 * @param lesRationnels : tableau de rationnels
 	 * @param nb : nombre d ’ éléments dans le tableau avant ajout 
+	 * @pre : tableau trié ( ordre croissant )
 	 * @pre : 0 ≤ nb < lesRationnels.length
 	 * @post : tableau trié ( ordre croissant )   
 	 */
 	static void insererRationnel ( Rationnel nouveau , Rationnel [ ] lesRationnels , int nb ) {
-		assert nb <= lesRationnels.length : "*** PRÉ-CONDITION NON VÉRIFIÉE *** : nb doit être inférieur à la taille du tableau";
+		assert nb <= lesRationnels.length : "*** PRÉ-CONDITION NON VÉRIFIÉE *** : nb doit être inférieur ou égal à la taille du tableau";
 		if(nb == 0) {
 			lesRationnels[0] = nouveau;	
-		} else {
+		} else if(nb < lesRationnels.length) {			
 			for(int i=nb ; i>0 ; i--) {
 				if(nouveau.valeur()>lesRationnels[i-1].valeur()) {
-					if(i<lesRationnels.length) {
-						lesRationnels[i] = nouveau;
-					} else {
-						lesRationnels[i-1] = nouveau;
-					}		
+					lesRationnels[i] = nouveau;
 					i=0;
 				} else {
-					if(i<lesRationnels.length) {
-						lesRationnels[i] = lesRationnels[i-1];
-						lesRationnels[i-1] = nouveau;
-					} else {
-						lesRationnels[i-1] = nouveau;
-					}
-					
+					lesRationnels[i] = lesRationnels[i-1];
+					lesRationnels[i-1] = nouveau;
 				}
 			}
-		}				
+		}	
 	 }
 	
 	 /**
 	  * renvoie somme des n premiers élem du tableau
+	  * @param lesRationnels : tableau de rationnels
 	  * @param nb : nombre d ’ éléments dans le tableau 
 	  * @pre : 0 ≤ nb < lesRationnels.length
 	  * @return Rationnel : somme des rationnels 
 	  */
 	 static Rationnel sommeRationnels(Rationnel [ ] lesRationnels , int nb) {
-		 assert nb <= lesRationnels.length : "*** PRÉ-CONDITION NON VÉRIFIÉE *** : nb doit être inférieur à la taille du tableau";
+		 assert nb <= lesRationnels.length : "*** PRÉ-CONDITION NON VÉRIFIÉE *** : nb doit être inférieur ou égal à la taille du tableau";
 		 Rationnel sommeR = new RationnelSimple(0);
 		 for(int i=0 ; i<nb ; i++) {
 			 sommeR = sommeR.somme(lesRationnels[i]);

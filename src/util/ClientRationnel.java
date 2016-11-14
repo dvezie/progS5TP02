@@ -2,6 +2,7 @@ package util;
 
 import java.util.Scanner;
 
+import rationnel.RationnelCouple;
 import rationnel.RationnelSimple;
 import types.Rationnel;
 
@@ -66,7 +67,8 @@ public class ClientRationnel {
 	 */
 	static Rationnel makeRationnel(int num, int den) {
 		assert den != 0 : "*** PRÉ-CONDITION NON VÉRIFIÉE *** : den doit être != 0";
-		return new RationnelSimple(num, den);
+		//return new RationnelSimple(num, den);
+		return new RationnelCouple(num, den);
 	}
 	
 	/**

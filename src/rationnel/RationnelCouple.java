@@ -13,8 +13,7 @@ public class RationnelCouple implements Rationnel {
 	   * @param num : valeur du numérateur
 	   */
 	public RationnelCouple(int num) {
-		this._couple.setFirst(num);
-		this._couple.setSecond(1);
+		this._couple = new Couple<Integer>(num, 1);
 	}
 	
 	/**
@@ -27,8 +26,7 @@ public class RationnelCouple implements Rationnel {
 	public RationnelCouple(int num, int den) {
 		assert den != 0 : "*** PRÉ-CONDITION NON VÉRIFIÉE : den doit être != 0"; 
 		
-		this._couple.setFirst(num);
-		this._couple.setSecond(den);
+		this._couple = new Couple<Integer>(num, den);
 		
 		this.simplifier();
 	}
@@ -38,9 +36,7 @@ public class RationnelCouple implements Rationnel {
 	   * @param r : rationnel à dupliquer
 	   */
 	public RationnelCouple(Rationnel r) {
-		//r = this.simplifier(r);
-		this._couple.setSecond(r.getDenominateur());
-		this._couple.setFirst(r.getNumerateur());
+		this._couple = new Couple<Integer>(r.getNumerateur(), r.getDenominateur());
 		this.simplifier();
 	}
 	

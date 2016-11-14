@@ -10,10 +10,10 @@ import rationnel.RationnelSimple;
 
 public class TestUnitaireRationnelSimple {
 
-//	void appelFonctionInsertion(Rationnel r, Rationnel[ ] tr, int N)
-//	  {
-//	    util.ClientRationnel.insererRationnel(r, tr, N);
-//	  }
+	void appelFonctionInsertion(Rationnel r, Rationnel[ ] tr, int N)
+	  {
+	    util.ClientRationnel.insererRationnel(r, tr, N);
+	  }
 
 	  @Test
 	  // test constructeur à un paramètre
@@ -167,121 +167,121 @@ public class TestUnitaireRationnelSimple {
 	    Assert.assertTrue(r2.compareTo(r1) < 0);
 	    System.out.println("test réussi");
 	  }
-//
-//	  @Test
-//	  public void inserer_tableau_vide() {
-//	    System.out.print("\ninsertion dans un tableau vide              : ");
-//	    // insertion dans un tableau vide
-//	    Rationnel [] resu = new Rationnel[]{new RationnelSimple(1, 2)};
-//
-//	    Rationnel [] lesRationnels = new Rationnel[1];
-//	    Rationnel r1 = new RationnelSimple(1, 2);
-//	    appelFonctionInsertion(r1, lesRationnels, 0);
-//	    tester_egalite(lesRationnels, resu, 1);
-//	    System.out.println("test réussi");
-//	  }
-//
-//	  @Test
-//	  public void inserer_tete_tableau_1elt() {
-//	    System.out.print("\ninsertion en tête d'un tableau d'un élément : ");
-//	    Rationnel [] resu = new Rationnel[]{new RationnelSimple(1, 3),
-//						new RationnelSimple(1, 2)};
-//
-//	    Rationnel [] lesRationnels = new Rationnel[2];
-//	    lesRationnels[0] = new RationnelSimple(1, 2);
-//	    appelFonctionInsertion(new RationnelSimple(1, 3), lesRationnels, 1);
-//	    tester_egalite(lesRationnels, resu, 2);
-//	    
-//	    System.out.println("test réussi");
-//	  }
-//
-//	  @Test
-//	  public void inserer_fin_tableau_1elt() {
-//	    System.out.print("\ninsertion en fin  d'un tableau d'un élément : ");
-//	    Rationnel [] resu = new Rationnel[]{new RationnelSimple(1, 3),
-//						new RationnelSimple(1, 2)};
-//
-//	    Rationnel [] lesRationnels = new Rationnel[2];
-//	    lesRationnels[0] = new RationnelSimple(1, 3);
-//	    appelFonctionInsertion(new RationnelSimple(1, 2), lesRationnels, 1);
-//	    tester_egalite(lesRationnels, resu, 2);
-//	    
-//	    System.out.println("test réussi");
-//	  }
-//
-//	  @Test
-//	  public void inserer_tete() {
-//	    System.out.print("\ninsertion en tête                           : ");
-//	    int [] numerateurs   = {
-//	      15,14,13,12,11,10,9,8,7,6,
-//	    };
-//	    int [] denominateurs = {
-//	      5,5,5,5,5,5,5,5,5,5,
-//	    };
-//	    Rationnel [] resu = new Rationnel[numerateurs.length];
-//	    for (int i = 0 ; i < numerateurs.length;  ++i) {
-//	      resu[resu.length - i - 1] = new RationnelSimple(numerateurs[i], denominateurs[i]);
-//	    }
-//
-//	    // insérer
-//	    Rationnel [] lesRationnels = new Rationnel[numerateurs.length];
-//	    for (int i = 0; i < numerateurs.length; ++i) {
-//	      appelFonctionInsertion(new RationnelSimple(numerateurs[i], denominateurs[i]),
-//					       lesRationnels, i);
-//	    }
-//	    tester_egalite(lesRationnels, resu, numerateurs.length);
-//	    System.out.println("test réussi");
-//	  }
-//
-//	  @Test
-//	  public void inserer_fin() {
-//	    System.out.print("\ninsertion en fin                            : ");
-//	    int [] numerateurs   = {
-//	      15,14,13,12,11,10,9,8,7,6,
-//	    };
-//	    int [] denominateurs = {
-//	      5,5,5,5,5,5,5,5,5,5,
-//	    };
-//	    Rationnel [] resu = new Rationnel[numerateurs.length];
-//	    for (int i = 0 ; i < numerateurs.length;  ++i) {
-//	      resu[resu.length - i - 1] = new RationnelSimple(numerateurs[i], denominateurs[i]);
-//	    }
-//
-//	    // insérer
-//	    Rationnel [] lesRationnels = new Rationnel[numerateurs.length];
-//	    for (int i = numerateurs.length - 1; i >= 0; --i) {
-//	      appelFonctionInsertion(new RationnelSimple(numerateurs[i], denominateurs[i]),
-//					       lesRationnels, lesRationnels.length - i - 1);
-//	    }
-//	    tester_egalite(lesRationnels, resu, numerateurs.length);
-//	    System.out.println("test réussi");
-//	  }
-//
-//	  @Test
-//	  public void inserer_partout() {
-//	    System.out.print("\ninsertion partout                           : ");
-//	    int [] numerateurs   = {
-//	      15,3,-5,10,11,-6,-8,7,13,14,
-//	    };
-//	    int [] denominateurs = {
-//	      5,5,5,5,5,5,5,5,5,5,
-//	    };
-//	    Rationnel [] resu = new Rationnel[numerateurs.length];
-//	    int [] numerateurs_tris = Arrays.copyOf(numerateurs, numerateurs.length);
-//	    Arrays.sort(numerateurs_tris);
-//	    for (int i = 0 ; i < numerateurs_tris.length;  ++i) {
-//	      resu[i] = new RationnelSimple(numerateurs_tris[i], denominateurs[i]);
-//	    }
-//
-//	    // insérer
-//	    Rationnel [] lesRationnels = new Rationnel[numerateurs.length];
-//	    for (int i = 0 ; i < numerateurs.length;  ++i) {
-//	      appelFonctionInsertion(new RationnelSimple(numerateurs[i], denominateurs[i]),
-//					       lesRationnels, i);
-//	    }
-//	    tester_egalite(lesRationnels, resu, numerateurs.length);
-//	    System.out.println("test réussi");
-//	  }
+
+	  @Test
+	  public void inserer_tableau_vide() {
+	    System.out.print("\ninsertion dans un tableau vide              : ");
+	    // insertion dans un tableau vide
+	    Rationnel [] resu = new Rationnel[]{new RationnelSimple(1, 2)};
+
+	    Rationnel [] lesRationnels = new Rationnel[1];
+	    Rationnel r1 = new RationnelSimple(1, 2);
+	    appelFonctionInsertion(r1, lesRationnels, 0);
+	    tester_egalite(lesRationnels, resu, 1);
+	    System.out.println("test réussi");
+	  }
+
+	  @Test
+	  public void inserer_tete_tableau_1elt() {
+	    System.out.print("\ninsertion en tête d'un tableau d'un élément : ");
+	    Rationnel [] resu = new Rationnel[]{new RationnelSimple(1, 3),
+						new RationnelSimple(1, 2)};
+
+	    Rationnel [] lesRationnels = new Rationnel[2];
+	    lesRationnels[0] = new RationnelSimple(1, 2);
+	    appelFonctionInsertion(new RationnelSimple(1, 3), lesRationnels, 1);
+	    tester_egalite(lesRationnels, resu, 2);
+	    
+	    System.out.println("test réussi");
+	  }
+
+	  @Test
+	  public void inserer_fin_tableau_1elt() {
+	    System.out.print("\ninsertion en fin  d'un tableau d'un élément : ");
+	    Rationnel [] resu = new Rationnel[]{new RationnelSimple(1, 3),
+						new RationnelSimple(1, 2)};
+
+	    Rationnel [] lesRationnels = new Rationnel[2];
+	    lesRationnels[0] = new RationnelSimple(1, 3);
+	    appelFonctionInsertion(new RationnelSimple(1, 2), lesRationnels, 1);
+	    tester_egalite(lesRationnels, resu, 2);
+	    
+	    System.out.println("test réussi");
+	  }
+
+	  @Test
+	  public void inserer_tete() {
+	    System.out.print("\ninsertion en tête                           : ");
+	    int [] numerateurs   = {
+	      15,14,13,12,11,10,9,8,7,6,
+	    };
+	    int [] denominateurs = {
+	      5,5,5,5,5,5,5,5,5,5,
+	    };
+	    Rationnel [] resu = new Rationnel[numerateurs.length];
+	    for (int i = 0 ; i < numerateurs.length;  ++i) {
+	      resu[resu.length - i - 1] = new RationnelSimple(numerateurs[i], denominateurs[i]);
+	    }
+
+	    // insérer
+	    Rationnel [] lesRationnels = new Rationnel[numerateurs.length];
+	    for (int i = 0; i < numerateurs.length; ++i) {
+	      appelFonctionInsertion(new RationnelSimple(numerateurs[i], denominateurs[i]),
+					       lesRationnels, i);
+	    }
+	    tester_egalite(lesRationnels, resu, numerateurs.length);
+	    System.out.println("test réussi");
+	  }
+
+	  @Test
+	  public void inserer_fin() {
+	    System.out.print("\ninsertion en fin                            : ");
+	    int [] numerateurs   = {
+	      15,14,13,12,11,10,9,8,7,6,
+	    };
+	    int [] denominateurs = {
+	      5,5,5,5,5,5,5,5,5,5,
+	    };
+	    Rationnel [] resu = new Rationnel[numerateurs.length];
+	    for (int i = 0 ; i < numerateurs.length;  ++i) {
+	      resu[resu.length - i - 1] = new RationnelSimple(numerateurs[i], denominateurs[i]);
+	    }
+
+	    // insérer
+	    Rationnel [] lesRationnels = new Rationnel[numerateurs.length];
+	    for (int i = numerateurs.length - 1; i >= 0; --i) {
+	      appelFonctionInsertion(new RationnelSimple(numerateurs[i], denominateurs[i]),
+					       lesRationnels, lesRationnels.length - i - 1);
+	    }
+	    tester_egalite(lesRationnels, resu, numerateurs.length);
+	    System.out.println("test réussi");
+	  }
+
+	  @Test
+	  public void inserer_partout() {
+	    System.out.print("\ninsertion partout                           : ");
+	    int [] numerateurs   = {
+	      15,3,-5,10,11,-6,-8,7,13,14,
+	    };
+	    int [] denominateurs = {
+	      5,5,5,5,5,5,5,5,5,5,
+	    };
+	    Rationnel [] resu = new Rationnel[numerateurs.length];
+	    int [] numerateurs_tris = Arrays.copyOf(numerateurs, numerateurs.length);
+	    Arrays.sort(numerateurs_tris);
+	    for (int i = 0 ; i < numerateurs_tris.length;  ++i) {
+	      resu[i] = new RationnelSimple(numerateurs_tris[i], denominateurs[i]);
+	    }
+
+	    // insérer
+	    Rationnel [] lesRationnels = new Rationnel[numerateurs.length];
+	    for (int i = 0 ; i < numerateurs.length;  ++i) {
+	      appelFonctionInsertion(new RationnelSimple(numerateurs[i], denominateurs[i]),
+					       lesRationnels, i);
+	    }
+	    tester_egalite(lesRationnels, resu, numerateurs.length);
+	    System.out.println("test réussi");
+	  }
 
 	  // vérifier l'égalité des nb premiers éléments de deux tableaux
 	  void tester_egalite(Rationnel [] t1, Rationnel [] t2, int nb) {

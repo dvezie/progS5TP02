@@ -130,9 +130,9 @@ public class ClientRationnel {
 	 }
 	
 	 /**
-	  * renvoie somme des n premiers élem du tableau
+	  * renvoie somme des nb premiers élem du tableau
 	  * @param lesRationnels : tableau de rationnels
-	  * @param nb : nombre d ’ éléments dans le tableau 
+	  * @param nb : nombre d’éléments dans le tableau 
 	  * @pre : 0 ≤ nb < lesRationnels.length
 	  * @return Rationnel : somme des rationnels 
 	  */

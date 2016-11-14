@@ -10,6 +10,7 @@ public class RationnelSimple implements Rationnel {
 	/**
 	   * initialiser un rationnel à partir d'un entier : nb/1
 	   * @param num : valeur du numérateur
+	   * @post fraction irréductible et dénominateur = 1
 	   */
 	public RationnelSimple(int num) {
 		this._num = num;
@@ -24,34 +25,18 @@ public class RationnelSimple implements Rationnel {
 	   * @post fraction irréductible et dénominateur > 0
 	   */
 	public RationnelSimple(int num, int den) {
-		assert den != 0 : "*** PRÉ-CONDITION NON VÉRIFIÉE : den doit être != 0"; 
-		
-//		////////// On simplifie la fraction //////////
-//		// Gestion des signes
-//		if ((num<0 && den<0)||(num>=0 && den<0)) {
-//			num = -num;
-//			den = -den;
-//		}
-//		// Gestion des valeurs
-//		int pgcd = Outils.pgcd(num, den);
-//		if(pgcd > 1) {
-//			num = num / pgcd;
-//			den = den / pgcd;
-//		}
-//		///////////////////////////////////////////////
-		
+		assert den != 0 : "*** PRÉ-CONDITION NON VÉRIFIÉE : den doit être != 0"; 		
 		this._den = den;
-		this._num = num;
-		
+		this._num = num;		
 		this.simplifier();
 	}
 	
 	/**
 	   * initialiser un rationnel à partir d'un autre
 	   * @param r : rationnel à dupliquer
+	   * @post fraction irréductible
 	   */
 	public RationnelSimple(Rationnel r) {
-		//r = this.simplifier(r);
 		this._den = r.getDenominateur();
 		this._num = r.getNumerateur();
 		this.simplifier();
@@ -67,59 +52,8 @@ public class RationnelSimple implements Rationnel {
 		int somNum, somDen;
 		somNum = this._num*r.getDenominateur() + this._den*r.getNumerateur();
 		somDen = this._den*r.getDenominateur();
-		
-		//return this.simplifier(somNum, somDen);
 		return new RationnelSimple(somNum, somDen);
 	}
-	
-	public void simplifier() {
-		//////////On simplifie la fraction //////////
-		// Gestion des signes
-		if ((this._num<0 && this._den<0)||(this._num>=0 && this._den<0)) {
-			this._num = -this._num;
-			this._den = -this._den;
-		}
-		// Si la fraction est négative alors on change le signe de 
-		// celle-ci le temps de calculer le pgcd
-		int pgcd = 0;
-		if(this._num < 0) {
-			pgcd = Outils.pgcd(-this._num, this._den);
-		} else if(this._num > 0) {
-			pgcd = Outils.pgcd(this._num, this._den);			
-		}		
-		// Gestion des valeurs
-		if(pgcd > 1) {
-			this._num = this._num / pgcd;
-			this._den = this._den / pgcd;
-		}
-		///////////////////////////////////////////////
-	}
-	
-//	public Rationnel simplifier(int num, int den) {
-//		
-//		//////////On simplifie la fraction //////////
-//		// Gestion des signes
-//		if ((num<0 && den<0)||(num>=0 && den<0)) {
-//			num = -num;
-//			den = -den;
-//		}
-//		// Gestion des valeurs
-//		int pgcd = Outils.pgcd(num, den);
-//		if(pgcd > 1) {
-//			num = num / pgcd;
-//			den = den / pgcd;
-//		}
-//		///////////////////////////////////////////////
-//		
-//		return new RationnelSimple(num, den);
-//	}
-//	public Rationnel simplifier(Rationnel r) {
-//		return this.simplifier(r.getNumerateur(), r.getDenominateur());
-//	}
-//	
-//	public Rationnel simplifier() {
-//		return this.simplifier(this.getNumerateur(), this.getDenominateur());
-//	}
 	
 	@Override
 	public Rationnel inverse() {
@@ -156,6 +90,31 @@ public class RationnelSimple implements Rationnel {
 			return 1;
 		} else {
 			return -1;
+		}
+	}
+	
+	/**
+	   * simplifier l'écriture d'un rationnel
+	   * @post fraction irréductible
+	   */
+	public void simplifier() {
+		// Gestion des signes
+		if ((this._num<0 && this._den<0)||(this._num>=0 && this._den<0)) {
+			this._num = -this._num;
+			this._den = -this._den;
+		}
+		// Si la fraction est négative alors on change le signe de 
+		// celle-ci le temps de calculer le pgcd
+		int pgcd = 0;
+		if(this._num < 0) {
+			pgcd = Outils.pgcd(-this._num, this._den);
+		} else if(this._num > 0) {
+			pgcd = Outils.pgcd(this._num, this._den);			
+		}		
+		// Gestion des valeurs
+		if(pgcd > 1) {
+			this._num = this._num / pgcd;
+			this._den = this._den / pgcd;
 		}
 	}
 

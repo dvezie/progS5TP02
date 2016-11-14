@@ -79,8 +79,9 @@ public class ClientRationnel {
 	 */
 	static Rationnel makeRationnel(int num, int den) {
 		assert den != 0 : "*** PRÉ-CONDITION NON VÉRIFIÉE *** : den doit être != 0";
-		//return new RationnelSimple(num, den);
-		return new RationnelCouple(num, den);
+		Rationnel r = num % 2 == 0 ? new RationnelCouple(num, den) : new RationnelSimple(num, den);
+		System.out.println("Classe du rationnel créé : " + r.getClass());
+		return r;
 	}
 	
 	/**
